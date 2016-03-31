@@ -59,7 +59,7 @@ public class TTetromino extends Tetromino {
 		return color;
 	}
 	
-	Coordinate[] getBlock() {
+	public Coordinate[] getBlock() {
 		return block[rotationState];
 	}
 	

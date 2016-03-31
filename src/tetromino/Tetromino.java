@@ -50,6 +50,12 @@ public abstract class Tetromino {
 	abstract public Color getColor();
 	
 	/**
+	 * 获取骨牌各方块在[自身坐标系]中的位置
+	 * @return 骨牌各方块在[自身坐标系]中的坐标
+	 */
+	public abstract Coordinate[] getBlock();
+	
+	/**
 	 * 获取骨牌各方块在[背景坐标系]中的位置
 	 * @return 骨牌各方块在[背景坐标系]中的坐标
 	 */
@@ -164,12 +170,6 @@ public abstract class Tetromino {
 	    }
 	    return ret;
 	}
-	
-	/**
-	 * 获取骨牌各方块在[自身坐标系]中的位置
-	 * @return 骨牌各方块在[自身坐标系]中的坐标
-	 */
-	abstract Coordinate[] getBlock();
 	
 	/**
 	 * 获取骨牌旋转后在[自身坐标系]中的位置

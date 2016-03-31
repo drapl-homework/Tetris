@@ -118,25 +118,9 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		if(e.getSource() == animationTimer)
 			repaint();
 		// 下落计时
-		else if (e.getSource() == fallingTimer) {
-			if(!currentTetromino.moveDown()) {
-				// 不能再下落，将方块固定到背景中
-				Coordinate[] b = currentTetromino.getAbsoluteBlock();
-				try {
-					for(int i=0; i<4; i++)
-						grid[b[i].y][b[i].x] = currentTetromino.getColor();
-				} catch(ArrayIndexOutOfBoundsException ex) {
-					System.out.println("你输了");
-					fallingTimer.stop();
-					animationTimer.stop();
-					return;
-				}
-				scoring(); // 尝试消行
-				currentTetromino = Tetromino.randomTetromino(this);
-				fallingTimer.restart(); 
-				// TODO：查阅相关标准，查看新方块的下落间隔时间和起始位置
-			}
-		}
+		else if (e.getSource() == fallingTimer)
+			if(!currentTetromino.moveDown())
+				solid();
 	}
 
 	/** 
@@ -162,6 +146,7 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 			break;
 		case KeyEvent.VK_SPACE: // 方块直接下落到底端
 			currentTetromino.moveBottom();
+			solid();
 			break;
 		}
 	}
@@ -178,6 +163,26 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		return true;
 	}
 	
+	/**
+	 * 将方块固定到背景中
+	 */
+	void solid() {
+		Coordinate[] b = currentTetromino.getAbsoluteBlock();
+		try {
+			for(int i=0; i<4; i++)
+				grid[b[i].y][b[i].x] = currentTetromino.getColor();
+		} catch(ArrayIndexOutOfBoundsException ex) {
+			System.out.println("你输了");
+			fallingTimer.stop();
+			animationTimer.stop();
+			return;
+		}
+		scoring(); // 尝试消行
+		currentTetromino = Tetromino.randomTetromino(this);
+		fallingTimer.restart(); 
+		// TODO：查阅相关标准，查看新方块的下落间隔时间和起始位置
+
+	}
 	/** 
 	 * 尝试进行消行
 	 */

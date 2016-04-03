@@ -60,7 +60,7 @@ public class ZTetromino extends Tetromino {
 		return color;
 	}
 	
-	Coordinate[] getBlock() {
+	public Coordinate[] getBlock() {
 		return block[rotationState];
 	}
 	

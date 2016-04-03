@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
 public class Main {
 
 	private static JFrame window;
-	private static GameLabel gameLabel;
+	private static GamePanel gamePanel;
 
 	/**
 	 * @param args
@@ -32,7 +32,7 @@ public class Main {
 	public static void main(String[] args) {
         // 创建窗口
         window = new JFrame("Tetris");
-        gameLabel = new GameLabel();
+        gamePanel = new GamePanel();
         JPanel testPanel = new JPanel();
         JPanel contentPanel = (JPanel) window.getContentPane();
         
@@ -40,8 +40,8 @@ public class Main {
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.PAGE_AXIS));
         contentPanel.setAlignmentX(SwingConstants.CENTER);
         
-        testPanel.add(gameLabel);
-        contentPanel.add(testPanel);
+        //testPanel.add();
+        contentPanel.add(gamePanel);
         
         window.pack();
         window.setResizable(false);

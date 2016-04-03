@@ -25,7 +25,6 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import tetromino.OTetromino;
 import tetromino.Tetromino;
 /**
  * @author 陈宇非<yufei.chen@pku.edu.cn>
@@ -49,6 +48,9 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	int score;
 	int level;
 	int upgradeCounter;
+	boolean isPrepared = false;
+	boolean isPlaying = false;
+	ActionListener scoreListener, newTetrominoListener;
 	public static final int width = 10; // X方向方格数
 	public static final int height = 20; // Y方向方格数
 	static final int blockSize = 35; //每个正方形方格的大小
@@ -72,26 +74,49 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		setPreferredSize(new Dimension(width * blockSize, height * blockSize));
 		setFocusable(true);
 		requestFocus();
-		currentTetromino = Tetromino.randomTetromino(this); // 初始化方块
-		nextTetromino = Tetromino.randomTetromino(this);
 		
 		// 动画计时
 		animationTimer = new Timer(10, this); // 约100 fps
 		animationTimer.setRepeats(true);
-		animationTimer.start();
 		
 		// 下落计时
 		fallingTimer = new Timer(downInterval[level], this);
 		fallingTimer.setRepeats(true);
-		fallingTimer.start();
 		
 		addKeyListener(this);
 		setBackground(Color.BLACK);
 		setOpaque(true);
 	}
 	
+	public void prepare() {
+		currentTetromino = Tetromino.randomTetromino(this); // 初始化方块
+		nextTetromino = Tetromino.randomTetromino(this);
+		isPrepared = true;
+	}
+	
+	public void start() {
+		animationTimer.start();
+		fallingTimer.start();
+		isPlaying = true;
+		
+		// 游戏开始后才能显示下一张
+		if(newTetrominoListener != null)
+			newTetrominoListener.actionPerformed(
+					new ActionEvent(this, 0, "newTetromino"));
+	}
+	
+	public void pause() {
+		animationTimer.stop();
+		fallingTimer.stop();
+		isPlaying = false;
+	}
+	
 	public void paint(Graphics g) {
 		super.paint(g);
+		
+		// Java绘制图形界面时默认会调用一次paint，此时不画界面
+		if(!animationTimer.isRunning())
+			return;
 		
 		// 画下落的方块
 		Coordinate[] b = currentTetromino.getAbsoluteBlock(); // 获取下落方块各块坐标
@@ -115,6 +140,14 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 				
 	}
 
+	public int getScore() {
+		return score;
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		// 动画计时
 		if(e.getSource() == animationTimer)
@@ -125,6 +158,14 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 				solid();
 	}
 
+	public void setScoreListener(ActionListener e) {
+		scoreListener = e;
+	}
+	
+	public void setNewTetrominoListener(ActionListener e) {
+		newTetrominoListener = e;
+	}
+	
 	/** 
 	 * 按下按键的操作：
 	 * 左右移动方块
@@ -190,9 +231,12 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		scoring(); // 尝试消行
 		
 		// 产生新的骨牌
-		nextTetromino = Tetromino.randomTetromino(this);
 		currentTetromino = nextTetromino;
-		fallingTimer.restart(); 
+		nextTetromino = Tetromino.randomTetromino(this);
+		if(newTetrominoListener != null)
+			newTetrominoListener.actionPerformed(
+					new ActionEvent(this, 0, "newTetromino"));
+		fallingTimer.restart();
 		// TODO：查阅相关标准，查看新方块的下落间隔时间和起始位置
 
 	}
@@ -234,7 +278,10 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		// 按照 Original Nintendo Scoring System 记分
 		if(lineCount > 0) {
 			score += scorePerLevel[lineCount] * (level + 1);
-			System.out.printf("积分: %d, 等级: %d\n", score, level);
+			if(scoreListener != null) {
+				ActionEvent event = new ActionEvent(this, 0, "score");
+				scoreListener.actionPerformed(event);
+			}
 		}
 		
 		// 计算升级。

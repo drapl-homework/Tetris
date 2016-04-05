@@ -174,6 +174,8 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	 * 方块直接下落到底端
 	 */
 	public void keyPressed(KeyEvent e) {
+		if(!isPlaying)
+			return;
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_LEFT: // 方块向左移动
 			currentTetromino.moveLeft();

@@ -223,14 +223,21 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 			for(int i=0; i<4; i++)
 				grid[b[i].y][b[i].x] = currentTetromino.getColor();
 		} catch(ArrayIndexOutOfBoundsException ex) {
-			System.out.println("你输了");
-			fallingTimer.stop();
-			animationTimer.stop();
+			fail();
 			return;
 		}
 		scoring(); // 尝试消行
 		
 		// 产生新的骨牌
+		for(Coordinate i :
+				nextTetromino.getAbsoluteBlock()) {
+			if( i.x >= 0 && i.x < width &&
+					i.y >= 0 && i.y < height &&
+					isBlockOccupied(i.x, i.y)) {
+				fail();
+				return;
+			}
+		}
 		currentTetromino = nextTetromino;
 		nextTetromino = Tetromino.randomTetromino(this);
 		if(newTetrominoListener != null)
@@ -292,6 +299,13 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 			level++;
 			fallingTimer.setDelay(downInterval[level]);
 		}
+	}
+	
+	void fail() {
+		JOptionPane.showMessageDialog(null,
+				"你输了！");
+		fallingTimer.stop();
+		animationTimer.stop();
 	}
 	
 	/**

@@ -115,23 +115,21 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		// 画下落的方块
 		Coordinate[] b = currentTetromino.getAbsoluteBlock(); // 获取下落方块各块坐标
 		g.setColor(currentTetromino.getColor()); // 获取下落方块颜色
-		for(int i=0; i<4; i++)				
-				g.fillRect(b[i].x * blockSize,
-						// 背景坐标系Y轴方向和Java默认坐标系相反
-						(height - b[i].y - 1) * blockSize,
-						blockSize, blockSize);
+		for(int i=0; i<4; i++) 
+			g.fillRect(b[i].x * blockSize + 1, // 留出一个像素的边框
+					// 背景坐标系Y轴方向和Java默认坐标系相反
+					(height - b[i].y - 1) * blockSize + 1,
+					blockSize - 1, blockSize - 1);
 		
 		for(int y=0; y<height; y++)
-			for(int x=0; x<width; x++) {
+			for(int x=0; x<width; x++)
 				if(grid[y][x] != null) {
 					g.setColor(grid[y][x]);
-					g.fillRect(x * blockSize,
+					g.fillRect(x * blockSize + 1, // 留出一个像素的边框
 							 // 背景坐标系Y轴方向和Java默认坐标系相反
-							(height - y - 1) * blockSize, 
-							blockSize, blockSize);
+							(height - y - 1) * blockSize + 1, 
+							blockSize - 1, blockSize - 1);
 				}
-			}
-				
 	}
 
 	public int getScore() {

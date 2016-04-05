@@ -42,6 +42,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g = new GameLabel();
 		nextlabel = new NextLabel();
 		g.setScoreListener(this);
+		g.setFailureListener(this);
 		g.setNewTetrominoListener(nextlabel);
 		g.prepare();
 		
@@ -85,14 +86,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		
-		// 等级/积分更新
 		else if(e.getSource() == g) {
-			levelLabel.setText(
-					String.format(
-							"等级：%d", g.getLevel()));
-			scoreLabel.setText(
-					String.format(
-							"积分：%d", g.getScore()));
+			// 等级/积分更新
+			if(e.getActionCommand().equals("score")) {
+				levelLabel.setText(
+						String.format(
+								"等级：%d", g.getLevel()));
+				scoreLabel.setText(
+						String.format(
+								"积分：%d", g.getScore()));
+			} else if(e.getActionCommand().equals("failure")) { // 游戏失败
+				startButton.setText("开始");
+				isRunning = false;
+				requestFocus();
+			}
 		}
 	}
 

@@ -50,7 +50,7 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	int upgradeCounter;
 	boolean isPrepared = false;
 	boolean isPlaying = false;
-	ActionListener scoreListener, newTetrominoListener;
+	ActionListener scoreListener, newTetrominoListener, failureListener;
 	public static final int width = 10; // X方向方格数
 	public static final int height = 20; // Y方向方格数
 	static final int blockSize = 35; //每个正方形方格的大小
@@ -158,6 +158,10 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	
 	public void setNewTetrominoListener(ActionListener e) {
 		newTetrominoListener = e;
+	}
+	
+	public void setFailureListener(ActionListener e) {
+		failureListener = e;
 	}
 	
 	/** 
@@ -303,6 +307,9 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 		fallingTimer.stop();
 		animationTimer.stop();
 		isPlaying = false;
+		if(failureListener != null)
+			failureListener.actionPerformed(
+					new ActionEvent(this, 0, "failure"));
 	}
 	
 	/**

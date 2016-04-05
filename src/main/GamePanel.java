@@ -13,6 +13,8 @@ package main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -24,7 +26,7 @@ import javax.swing.JPanel;
  * @since 2016-3-31
  *
  */
-public class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	/**
 	 * 
 	 */
@@ -62,7 +64,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		add(sidepanel);
 		//setAlignmentX(SwingConstants.CENTER);
 		//setFocusable(true);
-		//requestFocus();
+		addKeyListener(this);
+		setFocusable(true);
+		requestFocus();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -90,5 +94,24 @@ public class GamePanel extends JPanel implements ActionListener {
 					String.format(
 							"积分：%d", g.getScore()));
 		}
+	}
+
+	/**
+	 * 按任意键开始
+	 */
+	public void keyPressed(KeyEvent arg0) {
+		startButton.doClick();
+	}
+
+	/**
+	 * 此函数不使用
+	 */
+	public void keyReleased(KeyEvent arg0) {
+	}
+
+	/**
+	 * 此函数不使用
+	 */
+	public void keyTyped(KeyEvent arg0) {		
 	}
 }

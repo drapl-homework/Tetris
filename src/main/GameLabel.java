@@ -64,12 +64,6 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	GameLabel() {
 		grid = new Color[height][width]; // 以grid[y][x]的方式调用。y-竖直方向-高度，x-水平方向-宽度
 		
-		// 测试用
-		for(int i=2; i<width; i++) {
-			grid[0][i] = Color.BLUE;
-			grid[1][i] = Color.BLUE;
-		}
-		
 		// 设置大小
 		setPreferredSize(new Dimension(width * blockSize, height * blockSize));
 		setFocusable(true);

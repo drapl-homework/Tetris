@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 					sequencer = MidiSystem.getSequencer();
 					sequencer.open();
 					
-					File BackMusic = new File("/Users/SQ/Documents/JAVAworkspace/rusiia-square/src/ppl.mid");
+					File BackMusic = new File(this.getClass().getResource("/ppl.mid").getPath());
 					//the address above is on my own laptop, TA may need to reset the address to activate the music
 					Sequence mySeq = MidiSystem.getSequence(BackMusic);
 					sequencer.setSequence(mySeq);

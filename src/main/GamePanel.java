@@ -96,7 +96,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 						String.format(
 								"积分：%d", g.getScore()));
 			} else if(e.getActionCommand().equals("failure")) { // 游戏失败
-				startButton.setText("开始");
+				startButton.setText("游戏结束");
+				startButton.setEnabled(false);
 				isRunning = false;
 				requestFocus();
 			}

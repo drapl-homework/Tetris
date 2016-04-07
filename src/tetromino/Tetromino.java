@@ -91,15 +91,24 @@ public abstract class Tetromino {
 	 * 尝试将骨牌置底
 	 * @return 是否操作成功
 	 */
-	public void moveBottom() {	
-		for(int i=GameLabel.height; i>0; i--) {
-			Coordinate newPos = Coordinate.add(position,
-					new Coordinate(0, -i));
-			if(moveValid(newPos)) {
-				position = newPos;
-				return;
-			}
+	public void moveBottom() {
+		int maxDown = GameLabel.height; // 最多可以下落的高度
+		// 计算最多能将方块下落的高度
+		for( Coordinate i : getAbsoluteBlock()) {
+			if(i.y < maxDown) // 最多下落到底端
+				maxDown = i.y;
+			for( int j=1; i.y - j >=0 ; j++) // 穷举下落高度
+				if(g.isBlockOccupied(i.x, i.y - j)) { // 下落中遇到了阻碍
+					if(j - 1 < maxDown) // 松弛下落高度
+						maxDown = j - 1;
+					break;
+				}
 		}
+		
+		// 将方块下落
+		if(maxDown != 0)
+			position = Coordinate.add(position,
+					new Coordinate(0, -maxDown));
 	}
 	
 	public boolean rotate() {

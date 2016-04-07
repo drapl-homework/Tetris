@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	JButton startButton;
 	JLabel levelLabel;
 	JLabel scoreLabel;
+	Sequencer sequencer;
 	boolean isRunning = false;
 	public GamePanel() {
 		g = new GameLabel();
@@ -56,6 +57,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		levelLabel = new JLabel("等级：0 ");
 		scoreLabel = new JLabel("积分：0  ");
 		
+		// 背景音乐播放器构造比较耗时，要在面板初始化时完成。
+		try {
+			sequencer = MidiSystem.getSequencer();
+			sequencer.open();
+			File BackMusic = new File(this.getClass().getResource("/ppl.mid").getPath());
+			Sequence mySeq = MidiSystem.getSequence(BackMusic);
+			sequencer.setSequence(mySeq);
+		} catch (Exception e) {
+			System.err.println("背景音乐初始化错误，不播放背景音乐。");
+		}
+
 		sidepanel = new JPanel();
 		JPanel nextPanel = new JPanel();
 		startButton = new JButton("开始");
@@ -82,19 +94,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if(e.getSource() == startButton) {
 			if(!isRunning) { //开始
 				// Start the music
-				Sequencer sequencer;
-				try{
-					sequencer = MidiSystem.getSequencer();
-					sequencer.open();
-					
-					File BackMusic = new File(this.getClass().getResource("/ppl.mid").getPath());
-					//the address above is on my own laptop, TA may need to reset the address to activate the music
-					Sequence mySeq = MidiSystem.getSequence(BackMusic);
-					sequencer.setSequence(mySeq);
+				if(sequencer != null)
 					sequencer.start();
-				}catch(Exception e2){
-					e2.printStackTrace();
-				}
 				g.start();
 				g.requestFocus();
 				startButton.setText("暂停");

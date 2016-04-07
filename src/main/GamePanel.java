@@ -15,11 +15,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import javax.sound.midi.*;
+import java.io.*;
 
 /**
  * @author 陈宇非<yufei.chen@pku.edu.cn>
@@ -74,6 +81,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// 开始/暂停按钮
 		if(e.getSource() == startButton) {
 			if(!isRunning) { //开始
+				// Start the music
+				Sequencer sequencer;
+				try{
+					sequencer = MidiSystem.getSequencer();
+					sequencer.open();
+					
+					File BackMusic = new File("/Users/SQ/Documents/JAVAworkspace/rusiia-square/src/ppl.mid");
+					//the address above is on my own laptop, TA may need to reset the address to activate the music
+					Sequence mySeq = MidiSystem.getSequence(BackMusic);
+					sequencer.setSequence(mySeq);
+					sequencer.start();
+				}catch(Exception e2){
+					e2.printStackTrace();
+				}
 				g.start();
 				g.requestFocus();
 				startButton.setText("暂停");

@@ -300,8 +300,6 @@ public class GameLabel extends JLabel implements ActionListener, KeyListener {
 	}
 	
 	void fail() {
-		JOptionPane.showMessageDialog(null,
-				"你输了！");
 		fallingTimer.stop();
 		animationTimer.stop();
 		isPlaying = false;

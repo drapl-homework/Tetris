@@ -23,6 +23,7 @@ import javax.sound.midi.Sequencer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.sound.midi.*;
@@ -118,7 +119,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 						String.format(
 								"积分：%d", g.getScore()));
 			} else if(e.getActionCommand().equals("failure")) { // 游戏失败
-				startButton.setText("游戏结束");
+				JOptionPane.showMessageDialog(null,
+						"你输了！");
+				startButton.setText("结束");
 				startButton.setEnabled(false);
 				isRunning = false;
 				requestFocus();

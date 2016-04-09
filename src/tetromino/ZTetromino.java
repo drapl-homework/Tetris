@@ -22,7 +22,7 @@ import main.GameLabel;
  * Z形骨牌
  */
 public class ZTetromino extends Tetromino {
-	Color color = Color.RED;
+	Color color = new Color(0xB22222); // 耐火砖红
 	static final Coordinate[][] block =
 		{
 			{

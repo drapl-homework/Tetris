@@ -22,7 +22,7 @@ import main.GameLabel;
  * S形骨牌
  */
 public class STetromino extends Tetromino {
-	Color color = Color.BLUE;
+	Color color = new Color(0x1E90FF); // 道奇蓝
 	static final Coordinate[][] block =
 		{
 			{

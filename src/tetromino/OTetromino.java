@@ -23,7 +23,7 @@ import main.GameLabel;
  */
 public class OTetromino extends Tetromino {
 	
-	Color color = Color.GREEN;
+	Color color = new Color(0x36BF36); // 常春藤绿
 	static final Coordinate[] block =
 		{
 			new Coordinate(0, 1),

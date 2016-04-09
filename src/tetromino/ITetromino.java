@@ -22,7 +22,7 @@ import main.GameLabel;
  * I形骨牌
  */
 public class ITetromino extends Tetromino {
-	Color color = Color.YELLOW;
+	Color color = new Color(0xE6D933); // 含羞草黄
 	static final Coordinate[][] block =
 		{
 			{

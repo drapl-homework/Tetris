@@ -62,8 +62,8 @@ public class DualGamePanel extends JPanel implements ActionListener, KeyListener
 			nextlabel[i] = new NextLabel();
 			nextPanel[i] = new JPanel();
 			sidepanel[i] = new JPanel();
-			levelLabel[i] = new JLabel("等级：0 ");
-			scoreLabel[i] = new JLabel("积分：0  ");
+			levelLabel[i] = new JLabel("等级：0     ");
+			scoreLabel[i] = new JLabel("积分：0     ");
 			
 			g[i].setScoreListener(this);
 			g[i].setFailureListener(this);

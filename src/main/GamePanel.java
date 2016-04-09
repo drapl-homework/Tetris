@@ -55,8 +55,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setNewTetrominoListener(nextlabel);
 		g.prepare();
 		
-		levelLabel = new JLabel("等级：0 ");
-		scoreLabel = new JLabel("积分：0  ");
+		levelLabel = new JLabel("等级：0     ");
+		scoreLabel = new JLabel("积分：0     ");
 		
 		// 背景音乐播放器构造比较耗时，要在面板初始化时完成。
 		try {

@@ -118,6 +118,8 @@ public class DualGamePanel extends JPanel implements ActionListener, KeyListener
 				startButton.setText("开始");
 				isRunning = false;
 			}
+			// 点击按钮后，焦点会被按钮抢占，要把焦点重新移回面板
+			requestFocus();
 		} else if(e.getSource() == g[0]) {
 			// 左边游戏面板
 			// 等级/积分更新

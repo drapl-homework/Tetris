@@ -19,35 +19,36 @@ import main.GameLabel;
 /**
  * @author Qian Shen
  * @since 2016-4-2
- * L形骨牌
+ * S形骨牌
  */
 public class STetromino extends Tetromino {
-	Color color = Color.pink;
+	Color color = Color.BLUE;
 	static final Coordinate[][] block =
 		{
 			{
 				new Coordinate(0, 0),
-				new Coordinate(1, 0),
-				new Coordinate(0, -2),
-				new Coordinate(0, -1),
-			},
-			{
-				new Coordinate(0, 0),
-				new Coordinate(-1, 0),
-				new Coordinate(-2, 0),
-				new Coordinate(0, -1),
-			},
-			{
-				new Coordinate(0, 0),
-				new Coordinate(-1, 0),
-				new Coordinate(0, 2),
 				new Coordinate(0, 1),
+				new Coordinate(1, 1),
+				new Coordinate(-1, 0),
+			
 			},
 			{
 				new Coordinate(0, 0),
-				new Coordinate(1, 0),
-				new Coordinate(2, 0),
+				new Coordinate(0, -1),
+				new Coordinate(-1, 1),
+				new Coordinate(-1, 0),
+			},
+			{
+				new Coordinate(0, 0),
 				new Coordinate(0, 1),
+				new Coordinate(1, 1),
+				new Coordinate(-1, 0),
+			},
+			{
+				new Coordinate(0, 0),
+				new Coordinate(0, -1),
+				new Coordinate(-1, 1),
+				new Coordinate(-1, 0),
 			},
 		};
 	

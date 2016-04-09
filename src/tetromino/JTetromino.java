@@ -22,33 +22,32 @@ import main.GameLabel;
  * J形骨牌
  */
 public class JTetromino extends Tetromino {
-	Color color = Color.BLUE;
+	Color color = Color.pink;
 	static final Coordinate[][] block =
 		{
 			{
 				new Coordinate(0, 0),
-				new Coordinate(0, 1),
-				new Coordinate(1, 1),
-				new Coordinate(-1, 0),
-			
-			},
-			{
-				new Coordinate(0, 0),
+				new Coordinate(1, 0),
+				new Coordinate(0, -2),
 				new Coordinate(0, -1),
-				new Coordinate(-1, 1),
-				new Coordinate(-1, 0),
 			},
 			{
 				new Coordinate(0, 0),
-				new Coordinate(0, 1),
-				new Coordinate(1, 1),
 				new Coordinate(-1, 0),
-			},
-			{
-				new Coordinate(0, 0),
+				new Coordinate(-2, 0),
 				new Coordinate(0, -1),
-				new Coordinate(-1, 1),
+			},
+			{
+				new Coordinate(0, 0),
 				new Coordinate(-1, 0),
+				new Coordinate(0, 2),
+				new Coordinate(0, 1),
+			},
+			{
+				new Coordinate(0, 0),
+				new Coordinate(1, 0),
+				new Coordinate(2, 0),
+				new Coordinate(0, 1),
 			},
 		};
 	

@@ -126,10 +126,10 @@ public class DualGamePanel extends JPanel implements ActionListener, KeyListener
 			if(e.getActionCommand().equals("score")) {
 				levelLabel[0].setText(
 						String.format(
-								"等级：%d", g[0].getLevel()));
+								"等级：%-6d", g[0].getLevel()));
 				scoreLabel[0].setText(
 						String.format(
-								"积分：%d", g[0].getScore()));
+								"积分：%-6d", g[0].getScore()));
 			} else if(e.getActionCommand().equals("failure")) {
 				// 游戏失败
 				JOptionPane.showMessageDialog(null,

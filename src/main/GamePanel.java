@@ -114,10 +114,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if(e.getActionCommand().equals("score")) {
 				levelLabel.setText(
 						String.format(
-								"等级：%d", g.getLevel()));
+								"等级：%-6d", g.getLevel()));
 				scoreLabel.setText(
 						String.format(
-								"积分：%d", g.getScore()));
+								"积分：%-6d", g.getScore()));
 			} else if(e.getActionCommand().equals("failure")) { // 游戏失败
 				JOptionPane.showMessageDialog(null,
 						"你输了！");

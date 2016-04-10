@@ -44,7 +44,7 @@ public class Main {
 		window = new JFrame("请选择");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel contentPanel = (JPanel) window.getContentPane();
-        contentPanel.setLayout(new GridLayout(0, 2));
+        contentPanel.setLayout(new GridLayout(0, 3));
         singleGameButton = new JButton("单人游戏");
         singleGameButton.setPreferredSize(new Dimension(200, 200));
         dualGameButton = new JButton("双人游戏");
